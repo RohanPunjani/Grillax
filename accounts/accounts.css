@@ -1,0 +1,100 @@
+.loader-page{
+    height: 100vh;
+    width: 100vw;
+    z-index: 99;
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    display:none;
+}
+
+
+#spinner-container{
+    height: 70px;
+    width: 70px; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    transform: translate(-50%,-50%);
+}
+@keyframes animation {
+  0% {
+    stroke-dasharray: 1 98;
+    stroke-dashoffset: -105;
+  }
+  50% {
+    stroke-dasharray: 80 10;
+    stroke-dashoffset: -160;
+  }
+  100% {
+    stroke-dasharray: 1 98;
+    stroke-dashoffset: -300;
+  }
+}
+
+#spinner.spin {
+  transform-origin: center;
+  animation-name: animation;
+  animation-duration: 1.2s;
+  animation-timing-function: cubic-bezier;
+  animation-iteration-count: infinite;
+}
+.login-page{
+    background: black;
+    background-image: url('../assets/images/login.jpg');
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 400px;
+}
+.bg-black{
+    background-color: black;
+}
+.signUp-page{
+    background: black;
+    background-image: url('../assets/images/register.jpg');
+    height: 100vh;
+    width: 100vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:300px;
+}
+.black-layer{
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,.4);
+    position: absolute;
+    z-index: -1
+}
+.form-control{
+    border-top: 1px solid rgba(255,255,255,.2);
+    border-bottom: 1px solid #5337ff;
+    border-left: 1px solid rgba(255,255,255,.2);
+    border-right: 1px solid #5337ff;
+    background: black;
+}
+.form-control:focus{
+    background: black;
+}
+.login-btn{
+    padding: 8px 16px;
+    color: white;
+    background: #5337ff;
+    margin-top: 10px;
+}
+.login-btn:hover{
+    border: 0.5px solid #5337ff;
+    color: white;
+    background: #5337ff;
+}
+
+@media only screen and (max-width: 570px)
+{
+    .login-page{
+        background: black;
+        display: flex;
+        justify-content:center;
+        align-items: center ;
+    }
+}

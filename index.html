@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+    
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Grillax</title>
+</head>
+<body>
+    
+
+    <div class="sidebar">
+        <div class="brand"> <i class="fas fa-music fa-fw"></i> Grillax </div>
+        <div class="sub-bar menu">
+            <p>MENU</p>
+            <li class="active"><i class="fas fa-eye"></i> Explore</li>
+            <li><i class="fas fa-volume-down fa-fw"></i> Genres</li>
+            <li><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
+            <li><i class="fas fa-user fa-fw"></i> Artists</li>
+            <!-- <li><i class="fas fa-play fa-fw"></i> Radio</li> -->
+        </div>
+        
+        <div class="sub-bar library">
+            <p>Library</p>
+            <li><i class="fas fa-history"></i> Recent</li>
+            <li><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
+            <li><i class="fas fa-heart fa-fw"></i> Favourites</li>
+            <li><i class="fas fa-folder fa-fw"></i> Local</li>
+        </div>
+        <div class="sub-bar playlist">
+            <p>Playlist</p>
+            <li><i class="fas fa-plus-square fa-fw"></i> Create New</li>
+            <li><i class="fas fa-play-circle fa-fw"></i> Design Flow</li>
+            <li><i class="fas fa-play-circle fa-fw"></i> Best of 2020</li>
+            <li><i class="fas fa-play-circle fa-fw"></i> Nigeria Jams</li>
+        </div>
+    </div>
+    <main class="pr-4">
+        <div class="header">
+            <div class="nav-links">
+                <li class="active">MUSIC</li>
+                <li>PODCAST</li>
+                <li>LIVE</li>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for song, genre, artist" style="background-color: #18181d; border:0; border-radius:2px;">
+            </div>
+            <div class="nav-profile">
+                <li>
+                    <i class="fas fa-bell"></i>
+                </li>
+                <li>
+                    <i class="fas fa-shopping-bag"></i>
+                </li>
+                <div class="profile">
+                    <img id="profile_img" src="https://via.placeholder.com/25" alt="">
+                    <span id="profile_name">John Doe</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="hero">
+            <p>Trending New Hits</p>
+            <div class="song-container">
+                <h1>In My Feelings</h1>
+                <h3>Camila Cabello <span>63 Million Plays</span> </h3>
+                <button><b>Listen Now</b></button>
+                <span class="violet-text"><i class="fas fa-heart"></i></span>
+            </div>
+        </div> -->
+        <div id="explore_console">   
+            <div class="row ml-4">
+            <div class="lists col-md-9 h-100">
+                <div class=" jumbotron artists">
+
+                </div>
+                <div class="row">
+                    <div class="genres col-md-6">
+                        <div class="jumbotron"></div>
+    
+                    </div>
+                    <div class="albums col-md-6">
+                        <div class="jumbotron"></div>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 px-0">
+                <div class="audio-player">
+                    <div class="heading d-flex w-100">
+                        <b class="mr-auto m-4 lead">Player</b>
+                        <b class="m-4"><i class="fas fa-list-alt"></i></b>
+                    </div>
+                    <div class="cover">
+                        <img src="./data/covers/img1.jpg" alt="">
+                    </div>
+                    <br>
+                    <div class="name">
+                        <h1>Lovely</h1>
+                    </div>
+                    <div class="name">Khalid</div>
+                    <div class="time">
+                        <div class="current">0:00</div>
+                        <div class="timeline">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="length">0:00</div>
+                    </div>
+                    <div class="controls">
+                        <button class="repeat-container btn text-white">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <button class="prev-container btn text-white">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="play-container btn text-white">
+                            <div class="toggle-play play">
+                            </div>
+                        </button>
+                        <button class="next-container btn text-white">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="shuffle-container btn text-white">
+                            <i class="fas fa-random"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="./assets/js/user_controller.js"></script>
+    <script type="text/javascript">
+        $('document').ready(function(){
+
+
+            // for the first time there is no song playing... Let the user choose ...
+            user = JSON.parse(localStorage.getItem('user'));
+            $('#profile_img').attr('src', user.user_photo_url);
+            $('#profile_name').html(user.user_first_name + " " +user.user_last_name)
+        })
+    </script>
+
+</body>
+</html>

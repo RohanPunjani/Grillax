@@ -1,0 +1,24 @@
+Approach 1:
+
+    Tasks
+        Download a youtube video in FS
+            - read the docs 
+        Convert into mp3
+            - u have the script but again find a method to download the mp3 into file system
+        store in DB
+            - store song url in DB
+        And fetch next time
+            - pull whenever needed ^_^
+
+    Bs: (MVP)
+        store youtube URL, store Thumbnail Image, store the user creds
+
+    Outcome: 
+        turns out, it is illegal to convert a youtube video to mp3, now what?
+
+Approach 2:
+
+    Tasks
+        Upload a normal mp3 file from the User into the DB
+    
+        Play from anywhere, i think that's it ...

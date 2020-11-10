@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Register</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./accounts.css">
+  </head>
+  <body>
+    <div class="loader-page">      
+        <div id="spinner-container">  
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shadow">
+                        <feDropShadow dx="0" dy="0" stdDeviation="1.5" 
+                        flood-color="#5337ff"/>
+                    </filter>
+                </defs>
+                <circle id="spinner" style="fill:transparent;stroke:#5337ff;stroke-width: 7px;stroke-linecap: round;filter:url(#shadow);" cx="50" cy="50" r="45"/>
+            </svg>
+        </div>
+    </div>
+    <div class='login-page'>
+        <div class="container d-flex flex-column justify-content-center align-items-center align-items-md-start h-100">
+            <form class="form-group w-100 " style="max-width:300px" method="POST">
+                <input type="hidden" name="type" value="register">
+                <h1 class="text-white text-center text-md-left">Welcome to <br> <span style="font-family: monospace; letter-spacing: 15px;">GRILLAX</span><br></h1>
+                <div class="alert alert-danger display-error" style="display: none"></div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="text-white lead">First name</h3>
+                        <input type="text"
+                            class="form-control bg-black text-white lead" name="first_name" id="first_name" aria-describedby="helpId" placeholder="Rohan" required/>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <h3 class="text-white lead">Last name</h3>
+                        <input type="text"
+                            class="form-control bg-black text-white lead" name="last_name" id="last_name" aria-describedby="helpId" placeholder="Punjani" required/>
+                    </div>
+                </div>
+                <br/>
+                <h3 class="text-white lead">Email</h3>
+                <input type="email"
+                    class="form-control bg-black text-white lead" name="email" id="email" aria-describedby="helpId" placeholder="rohan@gmail.com" requried/>
+                <br/>
+                <h3 class="text-white lead">Password</h3>
+                <input type="password"
+                    class="form-control bg-black text-white lead" name="password" id="password" aria-describedby="helpId" placeholder="***********" required/>
+                <br/>
+                <div class="text-center text-md-left">
+                    <button type="submit" id="submit" class="btn bg-black login-btn">Register</button>&nbsp;&nbsp;
+                    <a href="./login.html" class="btn bg-black login-btn">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+
+        function isLoading(bool){
+            if(bool==true){
+                const loader_page = document.querySelector('.loader-page');
+                loader_page.style.display="block";
+                $('#spinner').addClass('spin');
+            }
+            else{
+                const loader_page = document.querySelector('.loader-page');
+                loader_page.style.display="none";
+                $('#spinner').removeClass('spin');
+            }
+        }
+        $('document').ready(function(){
+            $('form').on('submit',function(e){
+                e.preventDefault();
+                isLoading(true);
+                var first_name = $("#first_name").val();
+                var last_name = $("#last_name").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+                $.ajax({
+                    type: "POST",
+                    url: "./validate.php",
+                    dataType: "json",
+                    data: {
+                        first_name:first_name, 
+                        last_name:last_name, 
+                        email:email, 
+                        password:password, 
+                        type:"register"
+                    },
+                    success : function(data){
+                        if (data.code == "200"){
+                            $.ajax({
+                                type: "POST",
+                                url: "./validate.php",
+                                dataType: "json",
+                                data: {
+                                    email:email, 
+                                    password:password, 
+                                    type:"login"
+                                },
+                                success: function(data){
+                                    isLoading(false);
+                                    if (data.code == "200"){
+                                        $user = localStorage.getItem('user') ||  '';
+                                        if($user != data.user){
+                                            localStorage.setItem('user', JSON.stringify(data.user));
+                                        }
+                                        window.location.href='../';
+                                    } else {
+                                        $(".display-error").html(data.msg);
+                                        $(".display-error").css("display","block");
+                                    }
+                                }
+                            });
+                        } else {
+                            $(".display-error").html(data.msg);
+                            $(".display-error").css("display","block");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+  </body>
+</html>
