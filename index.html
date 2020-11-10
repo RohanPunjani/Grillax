@@ -39,7 +39,7 @@
         </div>
     </div>
     <main class="pr-4">
-        <div class="header">
+        <div class="header" id="header">
             <div class="nav-links">
                 <li class="active">MUSIC</li>
                 <li>PODCAST</li>
@@ -70,7 +70,7 @@
                 <span class="violet-text"><i class="fas fa-heart"></i></span>
             </div>
         </div> -->
-        <div id="explore_console">   
+        <div id="explore_console">
             <div class="row ml-4">
             <div class="lists col-md-9 h-100">
                 <div class=" jumbotron artists">
@@ -88,19 +88,19 @@
                 </div>
             </div>
             <div class="col-md-3 px-0">
-                <div class="audio-player">
+                <div class="audio-player" id="audio-player">
                     <div class="heading d-flex w-100">
                         <b class="mr-auto m-4 lead">Player</b>
                         <b class="m-4"><i class="fas fa-list-alt"></i></b>
                     </div>
                     <div class="cover">
-                        <img src="./data/covers/img1.jpg" alt="">
+                        <img src="" id="song_cover_img" alt="">
                     </div>
                     <br>
                     <div class="name">
-                        <h1>Lovely</h1>
+                        <h1 id="song_name">Pick A Song</h1>
                     </div>
-                    <div class="name">Khalid</div>
+                    <div class="name" id="artist_name">--</div>
                     <div class="time">
                         <div class="current">0:00</div>
                         <div class="timeline">
@@ -109,20 +109,20 @@
                         <div class="length">0:00</div>
                     </div>
                     <div class="controls">
-                        <button class="repeat-container btn text-white">
+                        <button class="repeat-container btn text-center text-white">
                             <i class="fas fa-redo"></i>
                         </button>
-                        <button class="prev-container btn text-white">
+                        <button class="prev-container btn text-center text-white-50 disabled">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="play-container btn text-white">
+                        <button class="play-container btn text-center text-white-50 disabled">
                             <div class="toggle-play play">
                             </div>
                         </button>
-                        <button class="next-container btn text-white">
+                        <button class="next-container btn text-center text-white-50 disabled">
                             <i class="fas fa-chevron-right"></i>
                         </button>
-                        <button class="shuffle-container btn text-white">
+                        <button class="shuffle-container btn text-center text-white">
                             <i class="fas fa-random"></i>
                         </button>
                     </div>
@@ -132,15 +132,16 @@
     </main>
     
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="./assets/js/user_controller.js"></script>
+    <script src="./assets/js/player_controller.js"></script>
     <script type="text/javascript">
         $('document').ready(function(){
-
 
             // for the first time there is no song playing... Let the user choose ...
             user = JSON.parse(localStorage.getItem('user'));
             $('#profile_img').attr('src', user.user_photo_url);
+            $('#song_cover_img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiP8WTCEN9DDblcMTq8sRsochVFzVyBxNXyZa4ARbiZuDqqSMv8tHaf5S0No8AuDGpA7os5z7fmfRF-e848PUu94q5Kbcry-N3ybAfMRs&usqp=CAU&ec=45722098');
             $('#profile_name').html(user.user_first_name + " " +user.user_last_name)
+            playSongHavingId(id);
         })
     </script>
 
