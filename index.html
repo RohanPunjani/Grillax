@@ -41,9 +41,9 @@
         <div class="sub-bar playlist">
             <p>Playlist</p>
             <li><i class="fas fa-plus-square fa-fw"></i> Create New</li>
-            <li><i class="fas fa-play-circle fa-fw"></i> Design Flow</li>
+            <!-- <li><i class="fas fa-play-circle fa-fw"></i> Design Flow</li>
             <li><i class="fas fa-play-circle fa-fw"></i> Best of 2020</li>
-            <li><i class="fas fa-play-circle fa-fw"></i> Nigeria Jams</li>
+            <li><i class="fas fa-play-circle fa-fw"></i> Nigeria Jams</li> -->
         </div>
     </div>
     <main class="pr-4">
@@ -82,13 +82,14 @@
             <div class="row ml-4">
             <div class="lists col-md-9 h-100">
                 <div class="jumbotron py-3">
-                    <h1>Artists</h1>
+                    <h1>Top Artists</h1>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
                         <div class="jumbotron py-3">
                             <div class="row align-items-center">
                                 <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all" onClick="showOnly('genre')">See all</span>
+                                <div class='list_of_genres row'></div>
                             </div>
                         </div>
                     </div>
@@ -97,7 +98,7 @@
                             <h1>Top Charts</h1>
 
                             <ol class="recently_added" type="">
-                                <li class='song_card d-flex align-items-center'>
+                                <li class='song_card d-flex align-items-center' onClick="playSong('data/tracks/song1.mp3')">
                                     <img src="data/covers/img1.jpg" alt="" height="100">
                                     <div class="song_desc">
                                         <h5>Song 1</h5>
@@ -173,6 +174,90 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="./assets/js/player_controller.js"></script>
     <script type="text/javascript">
+    function playSong(url) {
+
+
+        
+    const audioPlayer = document.querySelector(".audio-player");
+    const audio = new Audio(
+        "../ "+ url
+    );
+    console.dir(audio);
+    audio.addEventListener(
+        "loadeddata",
+        () => {
+            audioPlayer.querySelector(".time .length").textContent = beautifulTime(
+                audio.duration
+            );
+            audio.volume = 1;
+        },
+        false
+    );
+
+    //click on timeline to skip around
+    const timeline = audioPlayer.querySelector(".timeline");
+    timeline.addEventListener("click", e => {
+        const timelineWidth = window.getComputedStyle(timeline).width;
+        const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
+        audio.currentTime = timeToSeek;
+    }, false);
+
+    //check audio percentage and update time accordingly
+    setInterval(() => {
+        const progressBar = audioPlayer.querySelector(".progress");
+        progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+        audioPlayer.querySelector(".time .current").textContent = beautifulTime(
+            audio.currentTime
+        );
+    }, 500);
+
+    // Pause and play
+    const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+    playBtn.addEventListener(
+        "click",
+        () => {
+            if (audio.paused) {
+                playBtn.classList.remove("play");
+                playBtn.classList.add("pause");
+                audio.play();
+            } else {
+                playBtn.classList.remove("pause");
+                playBtn.classList.add("play");
+                audio.pause();
+            }
+        },
+        false
+    );
+    // const prevBtn = audioPlayer.querySelector(".controls .prev-container");
+    // prevBtn.addEventListener(
+    //     "click",
+    //     () => {
+    //         if (audio.paused) {
+    //             playBtn.classList.remove("play");
+    //             playBtn.classList.add("pause");
+    //             audio.play();
+    //         } else {
+    //             playBtn.classList.remove("pause");
+    //             playBtn.classList.add("play");
+    //             audio.pause();
+    //         }
+    //     },
+    //     false
+    // );
+
+    function beautifulTime(num) {
+        let seconds = parseInt(num);
+        let minutes = parseInt(seconds / 60);
+        seconds -= minutes * 60;
+        const hours = parseInt(minutes / 60);
+        minutes -= hours * 60;
+
+        if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+        return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+            seconds % 60
+        ).padStart(2, 0)}`;
+    }
+    }
         function showOnly(tab){
             const tag = "#"+tab+"_console";
             $('.console').css("display", "none");
@@ -184,20 +269,48 @@
         function comingSoon(){
             alert("\nWe are just as eager as you are for this feature, \nIt will be coming really soon :) \nKeep Supporting");
         }
+
+        function populateGenres(){
+            genre_bg_colors = ['#476a8a','#a69984','#a24c34','#0d4045','#a67894','#5547a5']
+            $.ajax({
+                url: 'ajax_helpers/getAllGenres.php',
+                method: 'get',
+                success: function(data){
+                    console.log((data));
+                    $val = JSON.parse(data);
+                    $output_html = '';
+                    if($val.length == 0)
+                    {
+                        // console.log("nothing found");
+                        $output_html = '<tr><td colspan=4>Nothing Found</td></tr>';
+                    }
+                    else{
+                        i=0;
+                        $val.forEach($value => {
+                            $value = JSON.parse($value)
+                            $output_html += "<div class='col-md-6 p-2'>";
+                            $output_html += "<div class='genre_card card d-flex flex-column justify-content-center px-3' onClick='sortViaGenre("+$value.id+")' style='background: "+ genre_bg_colors[i]+"; height: 60px; font-size: 20px'>";
+                            $output_html += $value.name;
+                            $output_html += "</div>";
+                            $output_html += "</div>";
+                            i = (i+1)%genre_bg_colors.length
+                        });
+
+                        
+                    }
+                    $('.list_of_genres').html($output_html)
+                    $('.list_of_genres > .col-md-6').hide().slice(0, 12).show();
+                }
+            })
+        }
         $('document').ready(function(){
             showOnly('explore');
             user = JSON.parse(localStorage.getItem('user'));
             $('#profile_img').attr('src', user.user_photo_url);
             $('#song_cover_img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiP8WTCEN9DDblcMTq8sRsochVFzVyBxNXyZa4ARbiZuDqqSMv8tHaf5S0No8AuDGpA7os5z7fmfRF-e848PUu94q5Kbcry-N3ybAfMRs&usqp=CAU&ec=45722098');
             $('#profile_name').html(user.user_first_name + " " +user.user_last_name)
-            // playSongHavingId(id);
+            // playSong(id);
             populateGenres();
-            n = 5;
-            genre_bg_colors = ['#476a8a','#a69984','#a24c34','#0d4045','#a67894','#5547a5']
-            for(i=0; i<n; i++)
-            {
-                console.log(i);
-            }
         })  
     </script>
 

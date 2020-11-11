@@ -1,10 +1,10 @@
-function playSongHavingId(id) {
+function playSong(url) {
 
 
     
     const audioPlayer = document.querySelector(".audio-player");
     const audio = new Audio(
-        // "./data/tracks/song1.mp3"
+        "../ "+ url
     );
     console.dir(audio);
     audio.addEventListener(
