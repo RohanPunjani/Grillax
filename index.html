@@ -8,6 +8,15 @@
     
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Grillax</title>
+    <script>
+        function checkLogin(){
+            if(!localStorage.getItem('user'))
+            {
+                window.location.href="accounts/login.html"
+            }
+        }
+        checkLogin();
+    </script>
 </head>
 <body>
     
@@ -16,11 +25,10 @@
         <div class="brand"> <i class="fas fa-music fa-fw"></i> Grillax </div>
         <div class="sub-bar menu">
             <p>MENU</p>
-            <li class="active"><i class="fas fa-eye"></i> Explore</li>
-            <li><i class="fas fa-volume-down fa-fw"></i> Genres</li>
-            <li><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
-            <li><i class="fas fa-user fa-fw"></i> Artists</li>
-            <!-- <li><i class="fas fa-play fa-fw"></i> Radio</li> -->
+            <li class="li_explore" onClick="showOnly('explore')"><i class="fas fa-eye"></i> Explore</li>
+            <li class="li_genre" onClick="showOnly('genre')"><i class="fas fa-volume-down fa-fw"></i> Genres</li>
+            <li class="li_album" onClick="showOnly('album')"><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
+            <li class="li_artist" onClick="showOnly('artist')"><i class="fas fa-user fa-fw"></i> Artists</li>
         </div>
         
         <div class="sub-bar library">
@@ -28,7 +36,7 @@
             <li><i class="fas fa-history"></i> Recent</li>
             <li><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
             <li><i class="fas fa-heart fa-fw"></i> Favourites</li>
-            <li><i class="fas fa-folder fa-fw"></i> Local</li>
+            <a href="./add_song.php" style="color: white; text-decoration: none"><li><i class="fas fa-folder fa-fw"></i> Add Song</li></a>
         </div>
         <div class="sub-bar playlist">
             <p>Playlist</p>
@@ -42,17 +50,17 @@
         <div class="header" id="header">
             <div class="nav-links">
                 <li class="active">MUSIC</li>
-                <li>PODCAST</li>
-                <li>LIVE</li>
+                <li onClick="comingSoon()">PODCAST</li>
+                <li onClick="comingSoon()">LIVE</li>
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Search for song, genre, artist" style="background-color: #18181d; border:0; border-radius:2px;">
             </div>
             <div class="nav-profile">
-                <li>
+                <li onClick="comingSoon()">
                     <i class="fas fa-bell"></i>
                 </li>
-                <li>
+                <li onClick="comingSoon()">
                     <i class="fas fa-shopping-bag"></i>
                 </li>
                 <div class="profile">
@@ -70,19 +78,34 @@
                 <span class="violet-text"><i class="fas fa-heart"></i></span>
             </div>
         </div> -->
-        <div id="explore_console">
+        <div id="explore_console" class="console">
             <div class="row ml-4">
             <div class="lists col-md-9 h-100">
-                <div class=" jumbotron artists">
-
+                <div class="jumbotron py-3">
+                    <h1>Artists</h1>
                 </div>
                 <div class="row">
-                    <div class="genres col-md-6">
-                        <div class="jumbotron"></div>
-    
+                    <div class="col-md-5">
+                        <div class="jumbotron py-3">
+                            <div class="row align-items-center">
+                                <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all" onClick="showOnly('genre')">See all</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="albums col-md-6">
-                        <div class="jumbotron"></div>
+                    <div class="col-md-7">
+                        <div class="jumbotron py-3">
+                            <h1>Top Charts</h1>
+
+                            <ol class="recently_added" type="">
+                                <li class='song_card d-flex align-items-center'>
+                                    <img src="data/covers/img1.jpg" alt="" height="100">
+                                    <div class="song_desc">
+                                        <h5>Song 1</h5>
+                                        <p><small>Khalid</small></p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
     
                     </div>
                 </div>
@@ -129,20 +152,53 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div id="genre_console" class="console mx-5">
+            <div class="jumbotron py-3 h-100">
+                <h1>Genres</h1>
+            </div>
+        </div>
+        <div id="album_console" class="console mx-5">
+            <div class="jumbotron py-3 h-100">
+                <h1>Albums</h1>
+            </div>
+        </div>
+        <div id="artist_console" class="console mx-5">
+            <div class="jumbotron py-3 h-100">
+                <h1>Artists</h1>
+            </div>
+        </div>
     </main>
     
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="./assets/js/player_controller.js"></script>
     <script type="text/javascript">
+        function showOnly(tab){
+            const tag = "#"+tab+"_console";
+            $('.console').css("display", "none");
+            $(tag).css("display", "block");
+            $('.menu li.active').removeClass('active');
+            const li = ".li_"+tab;
+            $('.menu '+li).addClass('active');
+        }
+        function comingSoon(){
+            alert("\nWe are just as eager as you are for this feature, \nIt will be coming really soon :) \nKeep Supporting");
+        }
         $('document').ready(function(){
-
-            // for the first time there is no song playing... Let the user choose ...
+            showOnly('explore');
             user = JSON.parse(localStorage.getItem('user'));
             $('#profile_img').attr('src', user.user_photo_url);
             $('#song_cover_img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiP8WTCEN9DDblcMTq8sRsochVFzVyBxNXyZa4ARbiZuDqqSMv8tHaf5S0No8AuDGpA7os5z7fmfRF-e848PUu94q5Kbcry-N3ybAfMRs&usqp=CAU&ec=45722098');
             $('#profile_name').html(user.user_first_name + " " +user.user_last_name)
-            playSongHavingId(id);
-        })
+            // playSongHavingId(id);
+            populateGenres();
+            n = 5;
+            genre_bg_colors = ['#476a8a','#a69984','#a24c34','#0d4045','#a67894','#5547a5']
+            for(i=0; i<n; i++)
+            {
+                console.log(i);
+            }
+        })  
     </script>
 
 </body>

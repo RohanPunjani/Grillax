@@ -185,6 +185,29 @@ main{
     border:0;
 }
 
+
+.console{
+    transition: all 5s ease;
+}
+
+li.song_card{
+    list-style-type: none;
+    height: 100px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+.song_desc{
+    margin-left: 20px;
+}
+li.song_card img{
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 .max-width-90{
     max-width: 90%;
 }
@@ -310,5 +333,5 @@ main{
 }
 
 .col-md-6 .jumbotron{
-    height: 430px
+    min-height: 430px
 }
