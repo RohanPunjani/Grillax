@@ -74,16 +74,18 @@
                 isLoading(true);
                 var email = $("#email").val();
                 var password = $("#password").val();
+                console.log(email,password);
                 $.ajax({
                     type: "POST",
-                    url: "./validate.php",
-                    dataType: "json",
+                    url: "validate.php",
+                    //dataType: "json",
                     data: {
                         email:email, 
                         password:password, 
                         type:"login"
                     },
                     success : function(data){
+                        console.log(data);
                         isLoading(false);
                         if (data.code == "200"){
                             $user = localStorage.getItem('user') ||  '';
