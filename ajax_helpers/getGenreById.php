@@ -12,7 +12,7 @@ $val = [];
 while($row = mysqli_fetch_assoc($res)){
     $output = json_encode(array(
         "id" => $row['genre_id'],
-        "name" => $row["genre_name"];
+        "name" => $row["genre_name"]
     ));
     if($i==0){
         $val = array($output);

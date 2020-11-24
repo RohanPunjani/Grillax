@@ -8,7 +8,6 @@
         integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Grillax</title>
     <script>
@@ -51,7 +50,7 @@
             <li><i class="fas fa-play-circle fa-fw"></i> Nigeria Jams</li> -->
         </div>
     </div>
-    <main class="pr-4">
+    <main class="">
         <div class="header" id="header">
             <div class="nav-links">
                 <li class="active">MUSIC</li>
@@ -84,98 +83,129 @@
                 <span class="violet-text"><i class="fas fa-heart"></i></span>
             </div>
         </div> -->
-        <div id="" class="">
-            <div class="row ml-4">
-                <div id="explore_console" class="console lists col-md-9 h-100">
-                    <div class="jumbotron py-3">
-                        <h1>Top Artists</h1>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="jumbotron py-3">
-                                <div class="row align-items-center">
-                                    <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all"
-                                        onClick="showOnly('genre')">See all</span>
-                                    <div class='list_of_genres row'></div>
-                                </div>
+        <div class="row mx-4">
+            <div id="explore_console" class="console col-md-9 h-100">
+                <div class="jumbotron py-3">
+                    <h1>Top Artists</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="jumbotron py-3">
+                            <div class="row align-items-center">
+                                <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all"
+                                    onClick="showOnly('genre')">See all</span>
+                                <div class='list_of_genres row'></div>
                             </div>
                         </div>
-                        <div class="col-md-7">
-                            <div class="jumbotron py-3">
-                                <h1>Top Charts</h1>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="jumbotron py-3">
+                            <h1>Top Charts</h1>
 
-                                <ol class="recently_added" type="">
-                                    <li class='song_card d-flex align-items-center bg-dark'
-                                        onClick="playSong('data/tracks/song1.mp3')">
-                                        <img src="data/covers/img1.jpg" alt="" height="100">
-                                        <div class="song_desc">
-                                            <h5>Song 1</h5>
-                                            <p><small>Khalid</small></p>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
+                            <ol class="recently_added" type="">
+                                <li class='song_card d-flex align-items-center bg-dark'>
+                                    <img src="data/covers/img1.jpg" alt="" height="100">
+                                    <div class="song_desc">
+                                        <h5>Song 1</h5>
+                                        <p><small>Khalid</small></p>
+                                    </div>
+                                    <button class="playBtn"><i class="fas fa-play-circle"></i></button>
+                                </li>
+                            </ol>
+                        </div>
 
-                        </div>
                     </div>
                 </div>
-                <div id="genre_console" class="console col-md-9 mx-5">
-                    <div class="jumbotron py-3 h-100">
-                        <h1>Genres</h1>
-                    </div>
-                </div>
-                <div id="album_console" class="console col-md-9 mx-5">
-                    <div class="jumbotron py-3 h-100">
-                        <h1>Albums</h1>
-                    </div>
-                </div>
-                <div id="artist_console" class="console col-md-9 mx-5">
-                    <div class="jumbotron py-3 h-100">
-                        <h1>Artists</h1>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="audio-player px-0" id="audio-player">
-                        <div class="heading d-flex w-100">
-                            <b class="mr-auto m-4 lead">Player</b>
-                            <b class="m-4"><i class="fas fa-list-alt"></i></b>
-                        </div>
-                        <div class="cover">
-                            <img src="" id="song_cover_img" alt="">
-                        </div>
-                        <br>
-                        <div class="name">
-                            <h1 id="song_name">Pick A Song</h1>
-                        </div>
-                        <div class="name" id="artist_name">--</div>
-                        <div class="time">
-                            <div class="current">0:00</div>
-                            <div class="timeline">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="length">0:00</div>
-                        </div>
-                        <div class="controls">
-                            <button class="repeat-container btn text-center text-white">
-                                <i class="fas fa-redo"></i>
-                            </button>
-                            <button class="prev-container btn text-center text-white-50">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="play-container btn text-center text-white-50">
-                                <div class="toggle-play play">
-                                </div>
-                            </button>
-                            <button class="next-container btn text-center text-white-50">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                            <button class="shuffle-container btn text-center text-white">
-                                <i class="fas fa-random"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div> 
             </div>
+            <div id="genre_console" class="console col-md-9">
+                <div class="jumbotron py-3 h-100">
+                    <h1>Genres</h1>
+                </div>
+            </div>
+            <div id="album_console" class="console col-md-9">
+                <div class="jumbotron py-3 h-100">
+                    <h1>Albums</h1>
+                </div>
+            </div>
+            <div id="artist_console" class="console col-md-9">
+                <div class="jumbotron py-3 h-100">
+                    <h1>Artists</h1>
+                </div>
+            </div>
+            <div id="search_results_console" class="console col-md-9">
+                <div class="jumbotron py-3">
+                    <h1>Top Artists</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="jumbotron py-3">
+                            <div class="row align-items-center">
+                                <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all"
+                                    onClick="showOnly('genre')">See all</span>
+                                <div class='list_of_genres row'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="jumbotron py-3">
+                            <h1>Top Charts</h1>
+
+                            <ol class="recently_added" type="">
+                                <li class='song_card d-flex align-items-center bg-dark'
+                                    onClick="playSong('data/tracks/song1.mp3')">
+                                    <img src="data/covers/img1.jpg" alt="" height="100">
+                                    <div class="song_desc">
+                                        <h5>Song 1</h5>
+                                        <p><small>Khalid</small></p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="audio-player px-0" id="audio-player">
+                    <div class="heading d-flex w-100">
+                        <b class="mr-auto m-4 lead">Player</b>
+                        <b class="m-4"><i class="fas fa-list-alt"></i></b>
+                    </div>
+                    <div class="cover">
+                        <img src="" id="song_cover_img" alt="">
+                    </div>
+                    <br>
+                    <div class="name">
+                        <h1 id="song_name">Pick A Song</h1>
+                    </div>
+                    <div class="name" id="artist_name">--</div>
+                    <div class="time">
+                        <div class="current">0:00</div>
+                        <div class="timeline">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="length">0:00</div>
+                    </div>
+                    <div class="controls">
+                        <button class="repeat-container btn text-center text-white">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <button class="prev-container btn text-center text-white-50">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="play-container btn text-center text-white-50">
+                            <div class="toggle-play play">
+                            </div>
+                        </button>
+                        <button class="next-container btn text-center text-white-50">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="shuffle-container btn text-center text-white">
+                            <i class="fas fa-random"></i>
+                        </button>
+                    </div>
+                </div>
+            </div> 
         </div>
     </main>
 
