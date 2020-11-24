@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Grillax</title>
     <script>
-        function checkLogin(){
-            if(!localStorage.getItem('user'))
-            {
-                window.location.href="accounts/login.html"
+        function checkLogin() {
+            if (!localStorage.getItem('user')) {
+                window.location.href = "accounts/login.html"
             }
         }
         checkLogin();
     </script>
 </head>
+
 <body>
-    
+
 
     <div class="sidebar">
         <div class="brand"> <i class="fas fa-music fa-fw"></i> Grillax </div>
@@ -30,13 +33,15 @@
             <li class="li_album" onClick="showOnly('album')"><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
             <li class="li_artist" onClick="showOnly('artist')"><i class="fas fa-user fa-fw"></i> Artists</li>
         </div>
-        
+
         <div class="sub-bar library">
             <p>Library</p>
             <li><i class="fas fa-history"></i> Recent</li>
             <li><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
             <li><i class="fas fa-heart fa-fw"></i> Favourites</li>
-            <a href="./add_song.php" style="color: white; text-decoration: none"><li><i class="fas fa-folder fa-fw"></i> Add Song</li></a>
+            <a href="./add_song.php" style="color: white; text-decoration: none">
+                <li><i class="fas fa-folder fa-fw"></i> Add Song</li>
+            </a>
         </div>
         <div class="sub-bar playlist">
             <p>Playlist</p>
@@ -54,7 +59,8 @@
                 <li onClick="comingSoon()">LIVE</li>
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search for song, genre, artist" style="background-color: #18181d; border:0; border-radius:2px;">
+                <input type="text" placeholder="Search for song, genre, artist"
+                    style="background-color: #18181d; border:0; border-radius:2px;">
             </div>
             <div class="nav-profile">
                 <li onClick="comingSoon()">
@@ -78,241 +84,235 @@
                 <span class="violet-text"><i class="fas fa-heart"></i></span>
             </div>
         </div> -->
-        <div id="explore_console" class="console">
+        <div id="" class="">
             <div class="row ml-4">
-            <div class="lists col-md-9 h-100">
-                <div class="jumbotron py-3">
-                    <h1>Top Artists</h1>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="jumbotron py-3">
-                            <div class="row align-items-center">
-                                <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all" onClick="showOnly('genre')">See all</span>
-                                <div class='list_of_genres row'></div>
+                <div id="explore_console" class="console lists col-md-9 h-100">
+                    <div class="jumbotron py-3">
+                        <h1>Top Artists</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="jumbotron py-3">
+                                <div class="row align-items-center">
+                                    <h1>Genres</h1> <span class="ml-auto px-4 py-1 see_all"
+                                        onClick="showOnly('genre')">See all</span>
+                                    <div class='list_of_genres row'></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="jumbotron py-3">
-                            <h1>Top Charts</h1>
+                        <div class="col-md-7">
+                            <div class="jumbotron py-3">
+                                <h1>Top Charts</h1>
 
-                            <ol class="recently_added" type="">
-                                <li class='song_card d-flex align-items-center' onClick="playSong('data/tracks/song1.mp3')">
-                                    <img src="data/covers/img1.jpg" alt="" height="100">
-                                    <div class="song_desc">
-                                        <h5>Song 1</h5>
-                                        <p><small>Khalid</small></p>
-                                    </div>
-                                </li>
-                            </ol>
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 px-0">
-                <div class="audio-player" id="audio-player">
-                    <div class="heading d-flex w-100">
-                        <b class="mr-auto m-4 lead">Player</b>
-                        <b class="m-4"><i class="fas fa-list-alt"></i></b>
-                    </div>
-                    <div class="cover">
-                        <img src="" id="song_cover_img" alt="">
-                    </div>
-                    <br>
-                    <div class="name">
-                        <h1 id="song_name">Pick A Song</h1>
-                    </div>
-                    <div class="name" id="artist_name">--</div>
-                    <div class="time">
-                        <div class="current">0:00</div>
-                        <div class="timeline">
-                            <div class="progress"></div>
-                        </div>
-                        <div class="length">0:00</div>
-                    </div>
-                    <div class="controls">
-                        <button class="repeat-container btn text-center text-white">
-                            <i class="fas fa-redo"></i>
-                        </button>
-                        <button class="prev-container btn text-center text-white-50 disabled">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="play-container btn text-center text-white-50 disabled">
-                            <div class="toggle-play play">
+                                <ol class="recently_added" type="">
+                                    <li class='song_card d-flex align-items-center bg-dark'
+                                        onClick="playSong('data/tracks/song1.mp3')">
+                                        <img src="data/covers/img1.jpg" alt="" height="100">
+                                        <div class="song_desc">
+                                            <h5>Song 1</h5>
+                                            <p><small>Khalid</small></p>
+                                        </div>
+                                    </li>
+                                </ol>
                             </div>
-                        </button>
-                        <button class="next-container btn text-center text-white-50 disabled">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        <button class="shuffle-container btn text-center text-white">
-                            <i class="fas fa-random"></i>
-                        </button>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        </div>
-        <div id="genre_console" class="console mx-5">
-            <div class="jumbotron py-3 h-100">
-                <h1>Genres</h1>
-            </div>
-        </div>
-        <div id="album_console" class="console mx-5">
-            <div class="jumbotron py-3 h-100">
-                <h1>Albums</h1>
-            </div>
-        </div>
-        <div id="artist_console" class="console mx-5">
-            <div class="jumbotron py-3 h-100">
-                <h1>Artists</h1>
+                <div id="genre_console" class="console col-md-9 mx-5">
+                    <div class="jumbotron py-3 h-100">
+                        <h1>Genres</h1>
+                    </div>
+                </div>
+                <div id="album_console" class="console col-md-9 mx-5">
+                    <div class="jumbotron py-3 h-100">
+                        <h1>Albums</h1>
+                    </div>
+                </div>
+                <div id="artist_console" class="console col-md-9 mx-5">
+                    <div class="jumbotron py-3 h-100">
+                        <h1>Artists</h1>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="audio-player px-0" id="audio-player">
+                        <div class="heading d-flex w-100">
+                            <b class="mr-auto m-4 lead">Player</b>
+                            <b class="m-4"><i class="fas fa-list-alt"></i></b>
+                        </div>
+                        <div class="cover">
+                            <img src="" id="song_cover_img" alt="">
+                        </div>
+                        <br>
+                        <div class="name">
+                            <h1 id="song_name">Pick A Song</h1>
+                        </div>
+                        <div class="name" id="artist_name">--</div>
+                        <div class="time">
+                            <div class="current">0:00</div>
+                            <div class="timeline">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="length">0:00</div>
+                        </div>
+                        <div class="controls">
+                            <button class="repeat-container btn text-center text-white">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="prev-container btn text-center text-white-50">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="play-container btn text-center text-white-50">
+                                <div class="toggle-play play">
+                                </div>
+                            </button>
+                            <button class="next-container btn text-center text-white-50">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="shuffle-container btn text-center text-white">
+                                <i class="fas fa-random"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     </main>
-    
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="./assets/js/player_controller.js"></script>
     <script type="text/javascript">
-    function playSong(url) {
-
-
-        
-    const audioPlayer = document.querySelector(".audio-player");
-    const audio = new Audio(
-        "../ "+ url
-    );
-    console.dir(audio);
-    audio.addEventListener(
-        "loadeddata",
-        () => {
-            audioPlayer.querySelector(".time .length").textContent = beautifulTime(
-                audio.duration
-            );
-            audio.volume = 1;
-        },
-        false
-    );
-
-    //click on timeline to skip around
-    const timeline = audioPlayer.querySelector(".timeline");
-    timeline.addEventListener("click", e => {
-        const timelineWidth = window.getComputedStyle(timeline).width;
-        const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
-        audio.currentTime = timeToSeek;
-    }, false);
-
-    //check audio percentage and update time accordingly
-    setInterval(() => {
-        const progressBar = audioPlayer.querySelector(".progress");
-        progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
-        audioPlayer.querySelector(".time .current").textContent = beautifulTime(
-            audio.currentTime
-        );
-    }, 500);
-
-    // Pause and play
-    const playBtn = audioPlayer.querySelector(".controls .toggle-play");
-    playBtn.addEventListener(
-        "click",
-        () => {
-            if (audio.paused) {
-                playBtn.classList.remove("play");
-                playBtn.classList.add("pause");
+        const audioPlayer = document.querySelector(".audio-player");
+        let audio = new Audio();
+        function playSong(url) {
+            if (audio.src!==audio.baseURI+url) {
+                audio.src = url;
                 audio.play();
-            } else {
-                playBtn.classList.remove("pause");
-                playBtn.classList.add("play");
-                audio.pause();
+            } else{
+                if(audio.paused)
+                    audio.play();
+                else
+                    audio.pause();
             }
-        },
-        false
-    );
-    // const prevBtn = audioPlayer.querySelector(".controls .prev-container");
-    // prevBtn.addEventListener(
-    //     "click",
-    //     () => {
-    //         if (audio.paused) {
-    //             playBtn.classList.remove("play");
-    //             playBtn.classList.add("pause");
-    //             audio.play();
-    //         } else {
-    //             playBtn.classList.remove("pause");
-    //             playBtn.classList.add("play");
-    //             audio.pause();
-    //         }
-    //     },
-    //     false
-    // );
+            audio.addEventListener(
+                "loadeddata",
+                () => {
+                    audioPlayer.querySelector(".time .length").textContent = beautifulTime(
+                        audio.duration
+                    );
+                    audio.volume = 1;
+                },
+                false
+            );
 
-    function beautifulTime(num) {
-        let seconds = parseInt(num);
-        let minutes = parseInt(seconds / 60);
-        seconds -= minutes * 60;
-        const hours = parseInt(minutes / 60);
-        minutes -= hours * 60;
+            //click on timeline to skip around
+            const timeline = audioPlayer.querySelector(".timeline");
+            timeline.addEventListener("click", e => {
+                const timelineWidth = window.getComputedStyle(timeline).width;
+                const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
+                audio.currentTime = timeToSeek;
+            }, false);
 
-        if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-        return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-            seconds % 60
-        ).padStart(2, 0)}`;
-    }
-    }
-        function showOnly(tab){
-            const tag = "#"+tab+"_console";
+            //check audio percentage and update time accordingly
+            setInterval(() => {
+                const progressBar = audioPlayer.querySelector(".progress");
+                progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+                audioPlayer.querySelector(".time .current").textContent = beautifulTime(
+                    audio.currentTime
+                );
+            }, 500);
+
+            // Pause and play
+            const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+            playBtn.addEventListener(
+                "click",
+                () => {
+                    if (audio.paused) {
+                        playBtn.classList.remove("play");
+                        playBtn.classList.add("pause");
+                        audio.play();
+                    } else {
+                        playBtn.classList.remove("pause");
+                        playBtn.classList.add("play");
+                        audio.pause();
+                    }
+                },
+                false
+            );
+
+            function beautifulTime(num) {
+                let seconds = parseInt(num);
+                let minutes = parseInt(seconds / 60);
+                seconds -= minutes * 60;
+                const hours = parseInt(minutes / 60);
+                minutes -= hours * 60;
+                if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+                return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+            }
+        }
+
+        function showOnly(tab) {
+            const tag = "#" + tab + "_console";
             $('.console').css("display", "none");
             $(tag).css("display", "block");
             $('.menu li.active').removeClass('active');
-            const li = ".li_"+tab;
-            $('.menu '+li).addClass('active');
-        }
-        function comingSoon(){
-            alert("\nWe are just as eager as you are for this feature, \nIt will be coming really soon :) \nKeep Supporting");
+            const li = ".li_" + tab;
+            $('.menu ' + li).addClass('active');
         }
 
-        function populateGenres(){
-            genre_bg_colors = ['#476a8a','#a69984','#a24c34','#0d4045','#a67894','#5547a5']
+        function comingSoon() {
+            alert("\nWe are just as eager as you are for this feature,\nIt will be coming really soon :) \nKeep Supporting");
+        }
+
+        // Genre Population completed :)
+        function populateGenres() {
+            genre_bg_colors = ['#476a8a', '#a69984', '#a24c34', '#0d4045', '#a67894', '#5547a5']
             $.ajax({
                 url: 'ajax_helpers/getAllGenres.php',
                 method: 'get',
-                success: function(data){
-                    console.log((data));
+                success: function (data) {
                     $val = JSON.parse(data);
                     $output_html = '';
-                    if($val.length == 0)
-                    {
+                    if ($val.length == 0) {
                         // console.log("nothing found");
                         $output_html = '<tr><td colspan=4>Nothing Found</td></tr>';
-                    }
-                    else{
-                        i=0;
+                    } else {
+                        i = 0;
                         $val.forEach($value => {
                             $value = JSON.parse($value)
                             $output_html += "<div class='col-md-6 p-2'>";
-                            $output_html += "<div class='genre_card card d-flex flex-column justify-content-center px-3' onClick='sortViaGenre("+$value.id+")' style='background: "+ genre_bg_colors[i]+"; height: 60px; font-size: 20px'>";
+                            $output_html +=
+                                "<div class='genre_card card d-flex flex-column justify-content-center px-3' onClick='sortViaGenre(" +
+                                $value.id + ")' style='background: " + genre_bg_colors[i] +
+                                "; height: 60px; font-size: 20px'>";
                             $output_html += $value.name;
                             $output_html += "</div>";
                             $output_html += "</div>";
-                            i = (i+1)%genre_bg_colors.length
+                            i = (i + 1) % genre_bg_colors.length
                         });
 
-                        
+
                     }
                     $('.list_of_genres').html($output_html)
                     $('.list_of_genres > .col-md-6').hide().slice(0, 12).show();
                 }
             })
         }
-        $('document').ready(function(){
+        
+        
+        $('document').ready(function () {
             showOnly('explore');
             user = JSON.parse(localStorage.getItem('user'));
             $('#profile_img').attr('src', user.user_photo_url);
-            $('#song_cover_img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiP8WTCEN9DDblcMTq8sRsochVFzVyBxNXyZa4ARbiZuDqqSMv8tHaf5S0No8AuDGpA7os5z7fmfRF-e848PUu94q5Kbcry-N3ybAfMRs&usqp=CAU&ec=45722098');
-            $('#profile_name').html(user.user_first_name + " " +user.user_last_name)
-            // playSong(id);
+            $('#song_cover_img').attr('src',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiP8WTCEN9DDblcMTq8sRsochVFzVyBxNXyZa4ARbiZuDqqSMv8tHaf5S0No8AuDGpA7os5z7fmfRF-e848PUu94q5Kbcry-N3ybAfMRs&usqp=CAU&ec=45722098'
+                );
+            $('#profile_name').html(user.user_first_name + " " + user.user_last_name)
             populateGenres();
-        })  
+        })
     </script>
 
 </body>
+
 </html>
