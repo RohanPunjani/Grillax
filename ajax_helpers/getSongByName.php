@@ -4,7 +4,7 @@
 require('../db.php');
 $id = $_GET['id'];
 //$sql = "SELECT * from songs";
-$sql = "SELECT * from songs where song_id='$id'";
+$sql = "SELECT * from songs";
 $res = mysqli_query($conn, $sql);
 $i = 0;
 $val = [];
