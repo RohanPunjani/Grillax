@@ -8,6 +8,7 @@
         integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./accounts/accounts.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Grillax</title>
     <script>
@@ -20,8 +21,21 @@
     </script>
 </head>
 
-<body>
+<body onload="Loading()">
 
+    <div class="loader-page">      
+        <div id="spinner-container">  
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <filter id="shadow">
+                        <feDropShadow dx="0" dy="0" stdDeviation="1.5" 
+                        flood-color="#5337ff"/>
+                    </filter>
+                </defs>
+                <circle id="spinner" style="fill:transparent;stroke:#5337ff;stroke-width: 7px;stroke-linecap: round;filter:url(#shadow);" cx="50" cy="50" r="45"/>
+            </svg>
+        </div>
+    </div>
 
     <div class="sidebar">
         <div class="brand"> <i class="fas fa-music fa-fw"></i> Grillax </div>
@@ -258,6 +272,20 @@
         const audioPlayer = document.querySelector(".audio-player");
         let audio = new Audio();
 
+        
+        function isLoading(bool){
+            if(bool==true){
+                const loader_page = document.querySelector('.loader-page');
+                loader_page.style.display="block";
+                $('#spinner').addClass('spin');
+            }
+            else{
+                const loader_page = document.querySelector('.loader-page');
+                loader_page.style.display="none";
+                $('#spinner').removeClass('spin');
+            }
+        }
+
         function handleSongCoverImage(url){
             $('#song_cover_img').attr('src',url);
         }
@@ -265,6 +293,7 @@
         function handleSongArtist(artist){
             $('#song_artist_name').html(artist);
         }
+        
         function handleSongTitle(title){
             $('#song_name').html(title);
         }
@@ -275,9 +304,13 @@
                 $(obj).removeClass('text-danger');
                 $(obj).removeClass('fav');
                 $.post('ajax_helpers/removeFavouriteSong.php', {song_id: song_id, user_id: user_id}, function(data){
+                    data = JSON.parse(data);
                     if(data.code == 200)
                     {
-                        
+                        console.log("Successful");
+                    }
+                    else{
+                        console.log("data");
                     }
                 })
             }
@@ -286,9 +319,13 @@
                 $(obj).addClass('text-danger');
                 $(obj).addClass('fav');
                 $.post('ajax_helpers/addFavouriteSong.php', {song_id: song_id, user_id: user_id}, function(data){
+                    data = JSON.parse(data);
                     if(data.code == 200)
                     {
-                        
+                        console.log("Successful");
+                    }
+                    else{
+                        console.log("data");
                     }
                 })
             }
@@ -436,7 +473,7 @@
         }
         
         function populateSongs(ctx='all', id=null) {
-
+            // isLoading(true)
             var url = 'ajax_helpers/';
             switch(ctx)
             {
@@ -461,27 +498,42 @@
                 data = JSON.parse(data);
                 // console.log(data);
                 var output = '';
-                data.map((song,idx) => {
+                var idx = 0;
+                data.map((song) => {
                     song = JSON.parse(song);
                     // console.log(song)
-                    output += "<li class='song_card d-flex align-items-center'>"
-                    idx = parseInt(idx+1);
-                    idx = (idx < 10) ? '0' + idx : idx;
-                    output += "<h2 class='text-white-50'>"+idx+"</h2>"
-                    output += "<img src='"+song.song_cover_image_url+"' alt='' height='100' class='ml-4'>"
-                    output += "<div class='song_desc mr-auto'>"
-                    output += "<h5>"+ song.name +"</h5>"
-                    output += "<p><small>"
-                    output += song.song_artist_name;
-                    output += "</small></p>"
-                    output += "</div>"
-                    var url = song.song_url, title = song.name, artist = song.song_artist_name, cover = song.song_cover_image_url;
-                    output += "<button class='songCardPlayBtn btn text-white mr-5' onclick='playSong(this, `"+url+"`,`"+title+"`,`"+artist+"`,`"+cover+"`)'><i class='fas fa-play-circle fa-2x'></i></button>"
-                    output += "<button class='songCardFavBtn btn text-white mr-5 btn-sm' onclick='handleFav(this, `"+song.id+"`, `"+user.user_id+"`)'><i class='far fa-heart fa-2x'></i></button>"
-                    output += "</li>"
+                    $.post('ajax_helpers/isFavouriteSong.php', {song_id : song.id,user_id: user.user_id}, function(Favdata){
+                        // console.log(Favdata);
+                        Favdata = JSON.parse(Favdata);
+                        output += "<li class='song_card d-flex align-items-center'>"
+                        idx = parseInt(idx)+1;
+                        idx = (idx < 10) ? '0' + idx : idx;
+                        output += "<h2 class='text-white-50'>"+idx+"</h2>"
+                        output += "<img src='"+song.song_cover_image_url+"' alt='' height='100' class='ml-4'>"
+                        output += "<div class='song_desc mr-auto'>"
+                        output += "<h5>"+ song.name +"</h5>"
+                        output += "<p><small>"
+                        output += song.song_artist_name;
+                        output += "</small></p>"
+                        output += "</div>"
+                        var url = song.song_url, title = song.name, artist = song.song_artist_name, cover = song.song_cover_image_url;
+                        output += "<button class='songCardPlayBtn btn text-white mr-5' onclick='playSong(this, `"+url+"`,`"+title+"`,`"+artist+"`,`"+cover+"`)'><i class='fas fa-play-circle fa-2x'></i></button>"
+                        if(Favdata.code == 200){
+                            output += "<button class='songCardFavBtn btn text-white mr-5 btn-sm fav' onclick='handleFav(this, `"+song.id+"`, `"+user.user_id+"`)'>"
+                            output += "<i class='fas fa-heart fa-2x'></i>";
+                        }
+                        else{
+                            output += "<button class='songCardFavBtn btn text-white mr-5 btn-sm' onclick='handleFav(this, `"+song.id+"`, `"+user.user_id+"`)'>"
+                            output += "<i class='far fa-heart fa-2x'></i>";
+                        }
+                        output += "</button>"
+                        output += "</li>"
+                        $('.list_of_songs').html(output)
+                        $('.list_of_songs').hide().slice(0, 5).show();
+                        
+                    })
                 })
-                $('.list_of_songs').html(output)
-                $('.list_of_songs').hide().slice(0, 5).show();
+                // isLoading(false);
             });
         }
         function populateArtists(){ 
@@ -520,10 +572,10 @@
             }
             populateGenres();
         }
-        toggleSwitch.addEventListener('change', switchTheme, false);
 
 
         $('document').ready(function () {
+            toggleSwitch.addEventListener('change', switchTheme, false);
             showOnly('explore');
             user = JSON.parse(localStorage.getItem('user'));
             $('#profile_img').attr('src', user.user_photo_url);

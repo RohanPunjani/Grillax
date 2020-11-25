@@ -6,8 +6,8 @@
 
 
 require('../db.php');
-$id = $_GET['song_id'];
-$user_id = $_GET['user_id'];
+$id = $_POST['song_id'];
+$user_id = $_POST['user_id'];
 //$sql = "SELECT * from songs";
 $sql = "SELECT * from favourites where user_id='$user_id' and song_id='$id'";
 $res = mysqli_query($conn, $sql);

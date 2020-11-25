@@ -5,8 +5,8 @@
 // simply add both to the favourites table & return success if succeeded :)
 
     require('../db.php');
-    $id = $_GET['song_id'];
-    $user = $_GET['user_id'];
+    $id = $_POST['song_id'];
+    $user = $_POST['user_id'];
     //$sql = "SELECT * from songs";
     $sql = "INSERT INTO favourites (`song_id`,`user_id`) values('$id','$user')";
     if(mysqli_query($conn, $sql)){
