@@ -10,11 +10,11 @@
     //$sql = "SELECT * from songs";
     $sql = "INSERT INTO favourites (`song_id`,`user_id`) values('$id','$user')";
     if(mysqli_query($conn, $sql)){
-        echo json_encode(array('msg'=>'inserted'));
+        echo json_encode(array('code'=> "200",'msg'=>'inserted'));
     }
     else{
        // do something else
-       echo json_encode(array('msg'=>'not inserted'));
+       echo json_encode(array("code" => "400", 'msg'=>'not inserted'));
     }
     
 

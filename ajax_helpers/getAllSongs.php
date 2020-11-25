@@ -3,8 +3,8 @@
 // Get Query for all Songs goes here
 require('../db.php');
 // $id = $_GET['id']; to get from id
-$sql = "SELECT * from songs";
-// $sql = "SELECT * from songs where song_id='$id'";
+$sql = "SELECT * from songs Inner Join artists on songs.song_artist_id=artists.artist_id";
+// echo $sql;
 $res = mysqli_query($conn, $sql);
 $i = 0;
 $val = [];
@@ -13,6 +13,7 @@ while($row = mysqli_fetch_assoc($res)){
         "id" => $row['song_id'],
         "name" => $row['song_title'],
         "song_artist_id" => $row['song_artist_id'],
+        "song_artist_name" => $row['artist_first_name']." ".$row['artist_last_name'],
         "song_id" => $row['song_id'],
         "song_cover_image_url" => $row['song_cover_image_url'],
         "song-title" => $row['song_title'],

@@ -38,9 +38,6 @@
             <li><i class="fas fa-history"></i> Recent</li>
             <li><i class="fas fa-notes-medical fa-fw"></i> Albums</li>
             <li><i class="fas fa-heart fa-fw"></i> Favourites</li>
-            <a href="./add_song.php" style="color: white; text-decoration: none">
-                <li><i class="fas fa-folder fa-fw"></i> Add Song</li>
-            </a>
         </div>
         <div class="sub-bar playlist">
             <p>Playlist</p>
@@ -58,15 +55,22 @@
                 <li onClick="comingSoon()">LIVE</li>
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search for song, genre, artist"
-                    style="background-color: #18181d; border:0; border-radius:2px;">
+                <input type="text" class="searchbar" placeholder="Search for song, genre, artist">
             </div>
             <div class="nav-profile">
-                <li onClick="comingSoon()">
+                <!-- <li onClick="comingSoon()">
                     <i class="fas fa-bell"></i>
                 </li>
                 <li onClick="comingSoon()">
                     <i class="fas fa-shopping-bag"></i>
+                </li> -->
+                <li class="mt-2">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round"></div>
+                        </label>
+                    </div>
                 </li>
                 <div class="profile">
                     <img id="profile_img" src="https://via.placeholder.com/25" alt="">
@@ -86,7 +90,14 @@
         <div class="row mx-4">
             <div id="explore_console" class="console col-md-9 h-100">
                 <div class="jumbotron py-3">
-                    <h1>Top Artists</h1>
+                    <h1>Artists</h1><br>
+                    <div class="list_of_artists d-flex text-align-center">
+                        <div class="artist_card d-flex flex-column align-items-center justify-content-center">
+                            <img src="https://i.pinimg.com/originals/57/0d/95/570d95e059841aaf53a22bb5dc5f238b.jpg" height="100" alt="">
+                            <br>
+                            Chainsmoker
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
@@ -100,16 +111,47 @@
                     </div>
                     <div class="col-md-7">
                         <div class="jumbotron py-3">
-                            <h1>Top Charts</h1>
-
-                            <ol class="recently_added" type="">
-                                <li class='song_card d-flex align-items-center bg-dark'>
-                                    <img src="data/covers/img1.jpg" alt="" height="100">
-                                    <div class="song_desc">
-                                        <h5>Song 1</h5>
+                            <h1>Songs</h1>
+                            <ol class="list_of_songs" type="">
+                                <li class='song_card d-flex align-items-center'>
+                                    <h2 class="text-white-50">01</h2>
+                                    <img src="https://i.pinimg.com/originals/8f/5e/2d/8f5e2d6f0968f9a30d450a87258f9f46.jpg" alt="" height="100" class="ml-4">
+                                    <div class="song_desc mr-auto">
+                                        <h5>Havana</h5>
+                                        <p><small>Camilla Cambello</small></p>
+                                    </div>
+                                    <button class="songCardPlayBtn btn text-white mr-5" onclick="playSong('data/tracks/song1.mp3', 'Havana', 'Camilla Cambello', 'https://i.pinimg.com/originals/8f/5e/2d/8f5e2d6f0968f9a30d450a87258f9f46.jpg')"><i class="fas fa-play-circle"></i></button>
+                                    <button class="songCardFavBtn btn text-white mr-5 btn-sm" onclick="handleFav(this, 'song_1', 'user_1')"><i class="far fa-heart fa-2x"></i></button>
+                                </li>
+                                <li class='song_card d-flex align-items-center'>
+                                    <h2 class="text-white-50">02</h2>
+                                    <img src="data/covers/img1.jpg" alt="" height="100" class="ml-4">
+                                    <div class="song_desc mr-auto">
+                                        <h5>Better</h5>
                                         <p><small>Khalid</small></p>
                                     </div>
-                                    <button class="playBtn"><i class="fas fa-play-circle"></i></button>
+                                    <button class="songCardPlayBtn btn text-white mr-5" onclick="playSong('data/tracks/song_5faae746151ab.mp3', 'Better', 'Khalid', 'data/covers/img1.jpg')"><i class="fas fa-play-circle"></i></button>
+                                    <button class="songCardFavBtn btn text-white mr-5 btn-sm" onclick="handleFav(this, 'song_1', 'user_1')"><i class="far fa-heart fa-2x"></i></button>
+                                </li>
+                                <li class='song_card d-flex align-items-center'>
+                                    <h2 class="text-white-50">03</h2>
+                                    <img src="https://i.pinimg.com/originals/57/0d/95/570d95e059841aaf53a22bb5dc5f238b.jpg" alt="" height="100" class="ml-4">
+                                    <div class="song_desc mr-auto">
+                                        <h5>Closer</h5>
+                                        <p><small>Chainsmokers</small></p>
+                                    </div>
+                                    <button class="songCardPlayBtn btn text-white mr-5" onclick="playSong('data/tracks/song2.mp3', 'Closer', 'Chainsmokers', 'https://i.pinimg.com/originals/57/0d/95/570d95e059841aaf53a22bb5dc5f238b.jpg')"><i class="fas fa-play-circle"></i></button>
+                                    <button class="songCardFavBtn btn text-white mr-5 btn-sm" onclick="handleFav(this, 'song_1', 'user_1')"><i class="far fa-heart fa-2x"></i></button>
+                                </li>
+                                <li class='song_card d-flex align-items-center'>
+                                    <h2 class="text-white-50">04</h2>
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Major_Lazer_and_DJ_Snake_-_Lean_On_%28feat._MØ%29.png/220px-Major_Lazer_and_DJ_Snake_-_Lean_On_%28feat._MØ%29.png" alt="" height="100" class="ml-4">
+                                    <div class="song_desc mr-auto">
+                                        <h5>Lean On</h5>
+                                        <p><small>Major Lazer</small></p>
+                                    </div>
+                                    <button class="songCardPlayBtn btn text-white mr-5" onclick="playSong('data/tracks/song3.mp3', 'Lean On', 'Major Lazer', 'https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Major_Lazer_and_DJ_Snake_-_Lean_On_%28feat._MØ%29.png/220px-Major_Lazer_and_DJ_Snake_-_Lean_On_%28feat._MØ%29.png')"><i class="fas fa-play-circle"></i></button>
+                                    <button class="songCardFavBtn btn text-white mr-5 btn-sm" onclick="handleFav(this, 'song_1', 'user_1')"><i class="far fa-heart fa-2x"></i></button>
                                 </li>
                             </ol>
                         </div>
@@ -178,7 +220,7 @@
                     <div class="name">
                         <h1 id="song_name">Pick A Song</h1>
                     </div>
-                    <div class="name" id="artist_name">--</div>
+                    <div class="name" id="song_artist_name">--</div>
                     <div class="time">
                         <div class="current">0:00</div>
                         <div class="timeline">
@@ -215,15 +257,74 @@
     <script type="text/javascript">
         const audioPlayer = document.querySelector(".audio-player");
         let audio = new Audio();
-        function playSong(url) {
+
+        function handleSongCoverImage(url){
+            $('#song_cover_img').attr('src',url);
+        }
+
+        function handleSongArtist(artist){
+            $('#song_artist_name').html(artist);
+        }
+        function handleSongTitle(title){
+            $('#song_name').html(title);
+        }
+
+        function handleFav(obj, song_id, user_id){
+            if($(obj).hasClass('fav')){
+                $(obj).html("<i class='far fa-heart fa-2x'></i>")
+                $(obj).removeClass('text-danger');
+                $(obj).removeClass('fav');
+                $.post('ajax_helpers/removeFavouriteSong.php', {song_id: song_id, user_id: user_id}, function(data){
+                    if(data.code == 200)
+                    {
+                        
+                    }
+                })
+            }
+            else{
+                $(obj).html("<i class='fas fa-heart fa-2x'></i>")
+                $(obj).addClass('text-danger');
+                $(obj).addClass('fav');
+                $.post('ajax_helpers/addFavouriteSong.php', {song_id: song_id, user_id: user_id}, function(data){
+                    if(data.code == 200)
+                    {
+                        
+                    }
+                })
+            }
+        }
+
+        function playSong(btnObj, url, title, artist, cover_img_url) {
+            if($(btnObj).hasClass('playing')){
+                $(btnObj).html("<i class='fas fa-play-circle fa-2x'></i>");
+                $(btnObj).removeClass('playing');
+            }
+            else{
+                $('.songCardPlayBtn.playing').removeClass('playing');
+                $('.songCardPlayBtn').html("<i class='fas fa-play-circle fa-2x'></i>");
+                $(btnObj).addClass('playing')
+                $(btnObj).html("<i class='fas fa-pause-circle fa-2x '></i>");
+            }
+            const playBtn = audioPlayer.querySelector(".controls .toggle-play");
             if (audio.src!==audio.baseURI+url) {
                 audio.src = url;
+                playBtn.classList.remove("play");
+                playBtn.classList.add("pause");
+                handleSongTitle(title);
+                handleSongArtist(artist);
+                handleSongCoverImage(cover_img_url);
                 audio.play();
             } else{
-                if(audio.paused)
+                if(audio.paused){
+                    playBtn.classList.remove("play");
+                    playBtn.classList.add("pause");
                     audio.play();
-                else
+                }
+                else{
+                    playBtn.classList.remove("pause");
+                    playBtn.classList.add("play");
                     audio.pause();
+                }
             }
             audio.addEventListener(
                 "loadeddata",
@@ -254,7 +355,6 @@
             }, 500);
 
             // Pause and play
-            const playBtn = audioPlayer.querySelector(".controls .toggle-play");
             playBtn.addEventListener(
                 "click",
                 () => {
@@ -297,12 +397,19 @@
 
         // Genre Population completed :)
         function populateGenres() {
-            genre_bg_colors = ['#476a8a', '#a69984', '#a24c34', '#0d4045', '#a67894', '#5547a5']
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                genre_bg_colors = ['#476a8a', '#a69984', '#a24c34', '#0d4045', '#a67894', '#5547a5', '#1298a6'];
+            }
+            else{
+                genre_bg_colors = ['#d9e7f3', '#fffaf1', '#fff0eb', '#e5eeee', '#fff8fc', '#f1efff'];
+            }
             $.ajax({
                 url: 'ajax_helpers/getAllGenres.php',
                 method: 'get',
                 success: function (data) {
                     $val = JSON.parse(data);
+                    
                     $output_html = '';
                     if ($val.length == 0) {
                         // console.log("nothing found");
@@ -313,16 +420,14 @@
                             $value = JSON.parse($value)
                             $output_html += "<div class='col-md-6 p-2'>";
                             $output_html +=
-                                "<div class='genre_card card d-flex flex-column justify-content-center px-3' onClick='sortViaGenre(" +
+                                "<div class='genre_card card d-flex flex-column justify-content-center px-3' onClick='populateSongs(`genre`, " +
                                 $value.id + ")' style='background: " + genre_bg_colors[i] +
-                                "; height: 60px; font-size: 20px'>";
+                                "; height: 60px; font-size: 20px; border: 0'>";
                             $output_html += $value.name;
                             $output_html += "</div>";
                             $output_html += "</div>";
                             i = (i + 1) % genre_bg_colors.length
                         });
-
-
                     }
                     $('.list_of_genres').html($output_html)
                     $('.list_of_genres > .col-md-6').hide().slice(0, 12).show();
@@ -330,7 +435,94 @@
             })
         }
         
-        
+        function populateSongs(ctx='all', id=null) {
+
+            var url = 'ajax_helpers/';
+            switch(ctx)
+            {
+                case 'all':
+                    url += 'getAllSongs.php';
+                    break;
+                case 'artist':
+                    url += 'getSongsByArtist.php?id='+id;
+                    break;
+                case 'genre':
+                    url += 'getSongsByGenre.php?id='+id;
+                    break;
+                case 'album':
+                    url += 'getSongsByAlbum.php?id='+id;
+                    break;
+                default:
+                    url += 'getAllSongs.php';
+                    break;
+            }
+            console.log(url);
+            $.get(url, function(data){
+                data = JSON.parse(data);
+                // console.log(data);
+                var output = '';
+                data.map((song,idx) => {
+                    song = JSON.parse(song);
+                    // console.log(song)
+                    output += "<li class='song_card d-flex align-items-center'>"
+                    idx = parseInt(idx+1);
+                    idx = (idx < 10) ? '0' + idx : idx;
+                    output += "<h2 class='text-white-50'>"+idx+"</h2>"
+                    output += "<img src='"+song.song_cover_image_url+"' alt='' height='100' class='ml-4'>"
+                    output += "<div class='song_desc mr-auto'>"
+                    output += "<h5>"+ song.name +"</h5>"
+                    output += "<p><small>"
+                    output += song.song_artist_name;
+                    output += "</small></p>"
+                    output += "</div>"
+                    var url = song.song_url, title = song.name, artist = song.song_artist_name, cover = song.song_cover_image_url;
+                    output += "<button class='songCardPlayBtn btn text-white mr-5' onclick='playSong(this, `"+url+"`,`"+title+"`,`"+artist+"`,`"+cover+"`)'><i class='fas fa-play-circle fa-2x'></i></button>"
+                    output += "<button class='songCardFavBtn btn text-white mr-5 btn-sm' onclick='handleFav(this, `"+song.id+"`, `"+user.user_id+"`)'><i class='far fa-heart fa-2x'></i></button>"
+                    output += "</li>"
+                })
+                $('.list_of_songs').html(output)
+                $('.list_of_songs').hide().slice(0, 5).show();
+            });
+        }
+        function populateArtists(){ 
+            $.get('ajax_helpers/getAllArtists.php', function(data) {
+                var output = '';
+                data = JSON.parse(data);
+                data.map(artist => {
+                    artist = JSON.parse(artist)
+                    output += "<div class='artist_card d-flex flex-column align-items-center justify-content-center px-3' onclick='populateSongs(`artist`, `"+artist.id+"`)'>"
+                    output +="<img src='"+artist.cover_photo_url+"' height='100' alt=''>"
+                    output +="<br>"
+                    output +=artist.name
+                    output +="</div>"
+                })                
+                $('.list_of_artists').html(output)
+                $('.list_of_artists').hide().slice(0, 12).show();
+            })
+        }
+
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            else {        
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+            populateGenres();
+        }
+        toggleSwitch.addEventListener('change', switchTheme, false);
+
+
         $('document').ready(function () {
             showOnly('explore');
             user = JSON.parse(localStorage.getItem('user'));
@@ -338,8 +530,14 @@
             $('#song_cover_img').attr('src',
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiP8WTCEN9DDblcMTq8sRsochVFzVyBxNXyZa4ARbiZuDqqSMv8tHaf5S0No8AuDGpA7os5z7fmfRF-e848PUu94q5Kbcry-N3ybAfMRs&usqp=CAU&ec=45722098'
                 );
-            $('#profile_name').html(user.user_first_name + " " + user.user_last_name)
+            $('#profile_name').html(user.user_first_name + " " + user.user_last_name);
             populateGenres();
+            populateArtists();
+            populateSongs();
+            $('.songCardPlayBtn').html("<i class='fas fa-play-circle fa-2x'></i>");
+            $('.songCardPlayBtn').click(function(){
+
+            })
         })
     </script>
 

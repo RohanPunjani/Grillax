@@ -1,3 +1,27 @@
+:root {
+    /* --primary-color: #302AE6; */
+    /* --secondary-color: #536390; */
+    --font-color: black;
+    --font-secondary-color: rgba(0,0,0,.5);
+    --bg-color: linear-gradient(to bottom right, #fafafa,#f1f4f5);
+    --sidebar-color: #e8ecef;
+    --card-color: #fff;
+    --boxshadow-color: #eee;
+    /* --heading-color: #292922; */
+}
+
+[data-theme="dark"] {
+    /* --primary-color: #9A97F3; */
+    /* --secondary-color: #818cab; */
+    --bg-color: #0e0e10;
+    --font-color: white;
+    --font-secondary-color: rgba(255,255,255,.5);
+    --sidebar-color: #18181d;
+    --card-color: #202026;
+    --boxshadow-color: rgb(5, 5, 5);
+    /* --heading-color: #818cab; */
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -5,6 +29,85 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #e2e2e2; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom right, rgb(164, 106, 230), #1216ef); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      transition: all .5s ease;
+    background: rgb(68, 28, 209); 
+  }
+
+  .theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .theme-switch-wrapper em {
+    margin-left: 10px;
+    font-size: 1rem;
+  }
+  
+  .theme-switch {
+    display: inline-block;
+    height: 24px;
+    position: relative;
+    width: 60px;
+  }
+  
+  .theme-switch input {
+    display: none;
+  }
+  
+  .slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    background-color: #fff;
+    bottom: 3px;
+    content: "";
+    height: 18px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 18px;
+  }
+  
+  input:checked + .slider {
+    background-color: #2e2e2e;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(32px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
 html,body{
     height: 100vh;
     width: 100vw;
@@ -15,8 +118,8 @@ html,body{
     width: 250px;
     height: 100vh;
     position: fixed;
-    background: #18181d;
-    color: white;
+    background: var(--sidebar-color);
+    color: var(--font-color);
     padding: 10px 0px;
     display: flex;
     flex-direction: column;
@@ -36,7 +139,7 @@ html,body{
 }
 
 .sidebar .sub-bar p{
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--font-color);
     font-weight: thin;
     font-size: 18px;
     padding: 20px 0;
@@ -65,10 +168,9 @@ html,body{
 
 main{
     margin-left: 250px;
-    background: black;
-    color: white;
+    background: var(--bg-color);
+    color:var(--font-color);
     min-height: 100vh;
-    padding-bottom: 200px;
     max-width: 100%;
     right: 0;
 }
@@ -101,7 +203,10 @@ main{
     background: transparent;
     border: 1px solid grey;
     border-radius: 10px;
-    color: white;
+    color: var(--font-color);
+    background-color: var(--card-color); 
+    border:0; 
+    border-radius:2px;
 }
 
 .header .nav-profile{
@@ -328,9 +433,16 @@ li.song_card img{
 }
 
 .jumbotron{
-    box-shadow: 0 0 20px 0 #000a;
-    background-color: #202026;   
+    box-shadow: 0px 0px 50px var(--boxshadow-color);
+    background-color: var(--card-color);   
     height: 100%;
+}
+
+.text-white{
+    color: var(--font-color)!important;
+}
+.text-white-50{
+    color: var(--font-secondary-color)!important;
 }
 
 .col-md-6 .jumbotron{
